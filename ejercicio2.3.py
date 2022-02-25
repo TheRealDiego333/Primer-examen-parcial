@@ -15,18 +15,20 @@ SQL = "SELECT * FROM ejercicio3;"
 INSERT = "INSERT INTO ejercicio3(centenas,decenas,unidades) VALUES(%s,%s,%s);"
 
 while(True):
-	numero = int (input ('Ingresa el valor de numero: '))
-	centenas=(numero%1000-numero%100)//100
-	decenas=(numero%100-numero%10)//10
-	unidades=numero%10
-	print ("Valor de centenas: ", (centenas))
-	print ("Valor de decenas: " , (decenas))
-	print ("Valor de unidades: ",(unidades))
-	print ()
-	cursor = conexion.cursor()
-	cursor.execute (INSERT,(centenas,decenas,unidades))
-	conexion.commit()
-
+	try:
+		numero = int (input ('Ingresa el valor de numero: '))
+		centenas=(numero%1000-numero%100)//100
+		decenas=(numero%100-numero%10)//10
+		unidades=numero%10
+		print ("Valor de centenas: ", (centenas))
+		print ("Valor de decenas: " , (decenas))
+		print ("Valor de unidades: ",(unidades))
+		print ()
+		cursor = conexion.cursor()
+		cursor.execute (INSERT,(centenas,decenas,unidades))
+		conexion.commit()
+	except ValueError:
+		print("Ingrese valor valido")
 	m = input("Quieres ver el historial de datos?(y/n): ")
 	if m == 'y' or m == 'Y':
 		cursor = conexion.cursor()
